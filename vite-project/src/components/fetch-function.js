@@ -1,6 +1,6 @@
-export const stockData = async () => {
+export const stockData = async (tickerSymbol) => {
     try {
-        const responce = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&outputsize=full&apikey=GNDURFAB7UHESSMK`)
+        const responce = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${tickerSymbol}&interval=5min&outputsize=full&apikey=GNDURFAB7UHESSMK`)
         if(!responce.ok) throw Error("Stock data not found!!!")
         const data = await responce.json()
         console.log(data)
