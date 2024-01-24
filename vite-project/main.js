@@ -13,10 +13,10 @@ const handleSubmit = (event) => {
 }
 
 const main = () => {
-  form = document.getElementById("#searchForm")
-  form.addEventListner('submit', handleSubmit())
+  // form = document.getElementById("#searchForm")
+  // form.addEventListner('submit', handleSubmit())
+  stockData()
 
-  
   console.log("Hello World")
 }
 
