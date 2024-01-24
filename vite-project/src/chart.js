@@ -74,15 +74,11 @@ const candlestick = {
       ctx.moveTo(chart.getDatasetMeta(0).data[index].x, chart.getDatasetMeta(0).data[index].y);
       ctx.lineTo(chart.getDatasetMeta(0).data[index].x, y.getPixelForValue(data.datasets[0].data[0].h))
       ctx.stroke();
-  
       ctx.beginPath()
       ctx.moveTo(chart.getDatasetMeta(0).data[index].x, chart.getDatasetMeta(0).data[0].y);
       ctx.lineTo(chart.getDatasetMeta(0).data[index].x, y.getPixelForValue(data.datasets[0].data[0].l))
       ctx.stroke()
     })
-
-
-
   }
 }
 
@@ -116,7 +112,6 @@ const myChart = new Chart(
   document.getElementById('myChart'),
   config
 );
-
 // Instantly assign Chart.js version
 const chartVersion = document.getElementById('chartVersion');
 chartVersion.innerText = Chart.version;

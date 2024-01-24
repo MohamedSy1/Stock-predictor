@@ -6,11 +6,23 @@ const getStockData = async () => {
         const data = await responce.json
         const newArr = []
         const someStockData = data.slice(0,10)
-        console.log(someStockData)
+        // get today
+        const todayDate = getDate()
+        console.log(todayDate)
+        // calculate yesterday: yyyy-mm-dd hh:mm:ss
+        // increment by 5
+        // check to see if the value exists
+        // if it does, grab the data
+        // stop at "19:55:00"
         // someStockData.forEach((info) => {
-
+        //     newArr.push(
+        //         {
+        //         "stock": someStockData["Meta Data"].symbole,
+        //         "x": someStockData["Time Series (5min)"],
+        //         }
+        //     )
         // })
-        return newArr;
+        // return newArr;
     }
     catch (error) {
         console.warn(error.message)
