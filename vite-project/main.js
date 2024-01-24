@@ -1,9 +1,9 @@
 import './style.css'
 import myChart from '../vite-project/src/chart'
-import getStockData from '../vite-project/src/components/fetch-function'
+import {stockData} from '../vite-project/src/components/fetch-function'
 
 const main = () => {
-  getStockData()
+  // stockData()
   console.log("Hello World")
 }
 

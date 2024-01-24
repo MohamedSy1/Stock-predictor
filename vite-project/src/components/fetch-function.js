@@ -1,33 +1,34 @@
-const getStockData = async () => {
+export const stockData = async () => {
     try {
-        const url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&outputsize=full&apikey=FUGVWCGH3PVJ77TV`
-        const responce = await fetch(url)
-        if(!responce.ok) throw Error("Stock not found!")
-        const data = await responce.json
-        const newArr = []
-        const someStockData = data.slice(0,10)
-        // get today
-        const todayDate = getDate()
-        console.log(todayDate)
-        // calculate yesterday: yyyy-mm-dd hh:mm:ss
-        // increment by 5
-        // check to see if the value exists
-        // if it does, grab the data
-        // stop at "19:55:00"
-        // someStockData.forEach((info) => {
-        //     newArr.push(
-        //         {
-        //         "stock": someStockData["Meta Data"].symbole,
-        //         "x": someStockData["Time Series (5min)"],
-        //         }
-        //     )
-        // })
-        // return newArr;
+        const responce = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&outputsize=full&apikey=GNDURFAB7UHESSMK`)
+        if(!responce.ok) throw Error("Stock data not found!!!")
+        const data = await responce.json()
+        console.log(data)
+        const lastRefreshed = new Date(data["Meta Data"]["3. Last Refreshed"]);
+
+        const targetEndTime = new Date(lastRefreshed);
+        targetEndTime.setHours(16, 0, 0, 0);
+        
+        let chartData = [];
+        
+        for (const [key, value] of Object.entries(data["Time Series (5min)"])) {
+            const dateTime = new Date(key);
+            if (dateTime <= targetEndTime) {
+                chartData.push({
+                    x: dateTime.getTime(),
+                    o: parseFloat(value["1. open"]),
+                    h: parseFloat(value["2. high"]),
+                    l: parseFloat(value["3. low"]),
+                    c: parseFloat(value["4. close"]),
+                    s: [parseFloat(value["1. open"]), parseFloat(value["4. close"])]
+                });
+            }
+        }
+        console.log(chartData)
+        return chartData;
     }
     catch (error) {
-        console.warn(error.message)
+        console.warn(error)
         return null
     }
 }
-
-export default getStockData; 
