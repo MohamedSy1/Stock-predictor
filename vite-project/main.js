@@ -1,21 +1,21 @@
 import './style.css'
 import myChart from '../vite-project/src/chart'
 import {stockData} from '../vite-project/src/components/fetch-function'
+import {renderStockData} from '../vite-project/src/components/render-functions.js'
 
-const handleSubmit = (event) => {
+const handleSubmit = async (event) => {
   event.preventDefault()
 
-  const form = event.target
-  const formData = FormData(form)
+  const formData = new FormData(event.target)
   const formObj = Object.fromEntries(formData)
 
-  console.log(formObj)
+  await stockData(formObj["search-bar"])
+
 }
 
 const main = () => {
-  // form = document.getElementById("#searchForm")
-  // form.addEventListner('submit', handleSubmit())
-  stockData()
+  const form = document.querySelector('#searchForm')
+  form.addEventListener('submit', handleSubmit)
 
   console.log("Hello World")
 }

@@ -1,5 +1,5 @@
 import { stockData } from "./components/fetch-function";
-
+import 'chartjs-plugin-zoom';
 
 const makeChart = async() => {
 
@@ -8,6 +8,7 @@ const makeChart = async() => {
   const data = {
     labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
     datasets: [{
+      barThickness: 20,
       label: 'Weekly Sales',
       data: stockDataArray,
       backgroundColor: (ctx) => {
@@ -35,8 +36,7 @@ const makeChart = async() => {
       //   'rgba(255, 159, 64, 0.2)',
       //   'rgba(0, 0, 0, 0.2)'
       // ],
-      borderColor: 'rgba(255, 26, 104, 1)',
-      borderWidth: 2  ,
+      borderWidth: 2,
       borderSkipped: false,
     }]
   };
@@ -79,7 +79,7 @@ const makeChart = async() => {
         },
         y: {
           beginAtZero: false,
-          grace: 1
+          grace: "1",
         }
       }
     },
@@ -96,6 +96,5 @@ const makeChart = async() => {
 
 
 makeChart()
-// Instantly assign Chart.js version
 
 export default myChart;
